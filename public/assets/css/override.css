@@ -1,0 +1,27 @@
+@CHARSET "UTF-8";
+.form-control 
+{
+	height : 43px;
+}
+
+.form-group .control-label	 
+{
+	font-size : 16px;
+}
+
+.btn 
+{
+	padding : 10px 12px;
+	font-size : 16px;
+}
+
+.form-inlable i{
+position: absolute;
+  top: 13px;
+  left: 25px;
+  font-size: 1.3em;
+  color: #BDBDBD;
+}
+.form-inlable .form-control {
+	padding : 6px 12px 6px 35px;
+}

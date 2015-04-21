@@ -1,0 +1,61 @@
+@CHARSET "UTF-8";
+body {
+	background-color: #eee;
+	font-family: 'Open Sans', sans-serif;
+}
+
+.gap-top-10
+{
+	margin-top : 10px;
+}
+.gap-top-20
+{
+	margin-top : 20px;
+}
+.gap-ver-10
+{
+	margin-top : 10px;
+	margin-bottom : 10px;
+}
+.gap-ver-20
+{
+	margin-top : 20px;
+	margin-bottom : 20px;
+}
+
+.gap-top-45 {
+	margin-top : 45px;
+}
+
+ul.rider-list {
+	list-style : none;
+}
+.rider-list li {
+	padding : 15px;
+	border-bottom : 1px solid #DDD;
+}
+.rider-list .rider-name {
+	text-transform : capitalize;
+}
+.vehicle-details .row {
+	padding : 5px 0px;
+}
+.compaign-bar .thumbnail {
+	height : 100px;
+}
+
+hr {
+	border-top : 1px solid #DDD;
+} 
+
+.rider-list .img-container
+{
+	height: 85px;
+  	width: 85px;
+  	overflow: hidden;
+}
+.rider-list .img-container img {
+	top: -5px;
+  position: relative;
+  left: -6px;
+}
