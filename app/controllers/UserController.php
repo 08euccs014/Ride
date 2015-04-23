@@ -71,4 +71,24 @@ class UserController extends BaseController {
         return true;
 
     }
+
+    public function loginForm()
+    {
+        return View::make('rider/login');
+    }
+
+    public function login()
+    {
+        $postData = Input::get('userdata', array());
+
+        //let's sanitize the data
+        $postData = $this->sanitize($postData);
+
+        $postData['username'];
+        $postData['password'];
+
+        riderModal::select('')
+
+        return Response::json(array('status' => 1, 'message' => 'successfully registered', 'url' => url('/')));
+    }
 }

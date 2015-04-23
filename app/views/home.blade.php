@@ -5,7 +5,7 @@
 	<!-- Search Form -->	
 	<div class="col-sm-offset-3 col-sm-5">
 	
-		<h1 class="text-center gap-ver-10">Let's Go</h1>
+		<h1 class="text-center gap-ver-10">Join My Way</h1>
 		<form class="form-horizontal gap-top-20 row">
 			<div class="form-group">
 			    <label for="ridefrom" class="col-sm-2 control-label">From</label>

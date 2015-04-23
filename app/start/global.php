@@ -33,7 +33,7 @@ ClassLoader::addDirectories(array(
 |
 */
 
-Log::useFiles(storage_path().'/logs/laravel.log');
+Log::useDailyFiles(storage_path().'/logs/laravel.log');
 
 /*
 |--------------------------------------------------------------------------
@@ -51,7 +51,25 @@ Log::useFiles(storage_path().'/logs/laravel.log');
 App::error(function(Exception $exception, $code)
 {
 	Log::error($exception);
+
+    return View::make('error/server_error');
 });
+
+/*
+ * listen to php fatal errors
+ */
+App::fatal(function($exception)
+{
+    Log::error($exception);
+
+    return View::make('error/server_error');
+});
+
+App::missing(function($exception)
+{
+    return Response::view('error/404', array(), 404);
+});
+
 
 /*
 |--------------------------------------------------------------------------
@@ -69,6 +87,7 @@ App::down(function()
 	return Response::make("Be right back!", 503);
 });
 
+
 /*
 |--------------------------------------------------------------------------
 | Require The Filters File
@@ -79,5 +98,7 @@ App::down(function()
 | definitions instead of putting them all in the main routes file.
 |
 */
+
+
 
 require app_path().'/filters.php';

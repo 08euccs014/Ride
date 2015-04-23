@@ -138,8 +138,6 @@
 </div>
 </div>
 
-<hr/>
-
 <script>
 
 $('#signupform').on('submit', function() {

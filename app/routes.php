@@ -12,5 +12,11 @@
 */
 
 Route::get('/', 'HomeController@home');
+Route::get('aboutus', 'HomeController@aboutus');
+
+
 Route::get('signup', 'UserController@signupForm');
 Route::post('ajax/signup', 'UserController@signup');
+
+Route::get('login', 'UserController@loginForm');
+Route::post('ajax/login', 'UserController@login');

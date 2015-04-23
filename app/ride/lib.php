@@ -13,7 +13,7 @@ class lib
 
     public static $instances = array();
 
-    private $id = 0;
+    public $id = 0;
 
     private function __construct()
     {
@@ -29,7 +29,7 @@ class lib
     {
         $className = static::$name;
 
-        if (0 == $id) {
+        if ($id == 0) {
             $object = new $className();
             $object->bind($bindData);
             return $object;

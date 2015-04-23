@@ -21,8 +21,18 @@ class HomeController extends BaseController {
 											array('name' => 'jimmy', 'vehical' => 'innova' ),
 											array('name' => 'tomy', 'vehical' => 'ciaz' )
 										) ;
-		$data = array('riders' => $riders);
+
+        $riderModel = App::make('riderModel');
+        $riders = $riderModel->getRiders();
+        $pagination = $riderModel->getPagination();
+
+		$data = array('riders' => $riders, 'pagination' =>$pagination);
 		return View::make('home', $data);
 	}
+
+    public function aboutus()
+    {
+        return View::make('informations/aboutus');
+    }
 
 }

@@ -40,4 +40,12 @@ class rider extends lib
         $this->verify = 0;
     }
 
+    public function getTrip()
+    {
+        $tripModel  = App::make('tripModel');
+        $trip       = $tripModel->select('id')->where('user_id', '=', $this->id)->first();
+        $trip       = trip::getIntance($trip->id);
+        return $trip;
+    }
+
 }

@@ -21,4 +21,13 @@ class trip extends lib
         $this->to = 0;
     }
 
+    public function from()
+    {
+        return location::getIntance($this->from);
+    }
+
+    public function to()
+    {
+        return location::getIntance($this->to);
+    }
 }
