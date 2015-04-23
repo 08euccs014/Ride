@@ -84,11 +84,10 @@ class UserController extends BaseController {
         //let's sanitize the data
         $postData = $this->sanitize($postData);
 
-        $postData['username'];
-        $postData['password'];
 
-        riderModal::select('')
+        //do the login code here
 
-        return Response::json(array('status' => 1, 'message' => 'successfully registered', 'url' => url('/')));
+
+        return Response::json(array('status' => 1, 'message' => 'successfully login', 'url' => url('/')));
     }
 }
