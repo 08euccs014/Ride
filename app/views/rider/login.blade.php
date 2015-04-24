@@ -28,6 +28,12 @@
  				</div>
  			</div>
  		</form>
+ 		<hr/>
+ 		<div class="gap-top-10 row">
+            <div class="col-md-12"><a class="pull-right" href="">Forget Password</a></div>
+            <div class="col-md-12 gap-top-10"><a class="pull-right" href="{{ url('signup') }}">Create Account</a></div>
+ 		</div>
+
 
  </div>
 </div>
