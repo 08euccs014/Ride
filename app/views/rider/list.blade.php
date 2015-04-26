@@ -3,7 +3,7 @@
 		@foreach($riders as $rider)
 		<?php
 		$id = $rider->id;
-		$rider = rider::getIntance($id);
+		$rider = rider::getInstance($id);
 		$trip = $rider->getTrip(); ?>
 		<li class="col-sm-12">
 			<div class="col-sm-2">
@@ -37,7 +37,7 @@
 				</div>
 			</div>
 			<div class="col-sm-3">
-				<button class="btn btn-primary gap-top-45">Contact Me</button>
+				<button class="btn btn-primary gap-top-45" onClick="contactRider('{{ url('ajax/rider/contact') }}', {{$rider->id}});">Contact Me</button>
 			</div>
 			
 		</li>

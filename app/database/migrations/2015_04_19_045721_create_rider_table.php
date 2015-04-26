@@ -33,6 +33,7 @@ class CreateRiderTable extends Migration {
             $table->text('params');
             //activate link it could be a number or whole link or token
             $table->string('activation');
+            $table->smallInteger('remember_token', 100);
             //it checks token has been sent or not it could be on mobile or mail
             $table->smallInteger('sendconfimation');
 

@@ -17,16 +17,11 @@ class HomeController extends BaseController {
 
 	public function home()
 	{
-		$riders =  array( 
-											array('name' => 'jimmy', 'vehical' => 'innova' ),
-											array('name' => 'tomy', 'vehical' => 'ciaz' )
-										) ;
-
-        $riderModel = App::make('riderModel');
-        $riders = $riderModel->getRiders();
-        $pagination = $riderModel->getPagination();
-
-		$data = array('riders' => $riders, 'pagination' =>$pagination);
+        $user        = Auth::user();
+        $riderModel  = App::make('riderModel');
+        $riders      = $riderModel->getRiders();
+        $pagination  = $riderModel->getPagination();
+		$data        = array('riders' => $riders, 'pagination' =>$pagination, 'loggedUser' =>$user);
 		return View::make('home', $data);
 	}
 

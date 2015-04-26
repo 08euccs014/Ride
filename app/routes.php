@@ -19,4 +19,12 @@ Route::get('signup', 'UserController@signupForm');
 Route::post('ajax/signup', 'UserController@signup');
 
 Route::get('login', 'UserController@loginForm');
+Route::get('logout', 'UserController@logout');
 Route::post('ajax/login', 'UserController@login');
+Route::get('password/remind', 'UserController@passwdReqForm');
+Route::post('password/remind/request', 'UserController@passwdResetReq');
+Route::get('password/reset/{token}', 'UserController@passwdResetForm');
+Route::post('password/resetdone', 'UserController@passwdResetDone');
+
+
+Route::post('ajax/rider/contact', 'UserController@contact');

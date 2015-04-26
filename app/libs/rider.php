@@ -44,7 +44,7 @@ class rider extends lib
     {
         $tripModel  = App::make('tripModel');
         $trip       = $tripModel->select('id')->where('user_id', '=', $this->id)->first();
-        $trip       = trip::getIntance($trip->id);
+        $trip       = trip::getInstance($trip->id);
         return $trip;
     }
 

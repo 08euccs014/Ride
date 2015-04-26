@@ -3,14 +3,12 @@
 <div class="row">
 
  <div class="col-sm-offset-3 col-sm-5 gap-top-20">
-
-
  <form id="loginform" action="{{ url('ajax/login') }}" method="post" class="form-horizontal">
 
  			<div class="form-group">
-                 <label for="username" class="col-sm-3 control-label">Username</label>
+                 <label for="email" class="col-sm-3 control-label">Email</label>
                  <div class="col-sm-9">
-                   <input type="text" class="form-control" name="userdata[username]" placeholder="username" />
+                   <input type="email" class="form-control" name="userdata[email]" placeholder="email" />
                  </div>
              </div>
 
@@ -30,10 +28,9 @@
  		</form>
  		<hr/>
  		<div class="gap-top-10 row">
-            <div class="col-md-12"><a class="pull-right" href="">Forget Password</a></div>
+            <div class="col-md-12"><a class="pull-right" href="{{ url('password/remind') }}">Forget Password</a></div>
             <div class="col-md-12 gap-top-10"><a class="pull-right" href="{{ url('signup') }}">Create Account</a></div>
  		</div>
-
 
  </div>
 </div>
@@ -49,8 +46,13 @@ $('#loginform').on('submit', function() {
     ajaxRequest(actionUrl, postData, 'POST', 'json', function(response){
         if(response.status == 1) {
             window.location = response.url;
+        }else{
+            alert(response.message);
         }
-    }, function(response){alert(response);} );
+    },
+    function(response){
+        alert(response.message);
+    });
 
 //stop the normal form submission
 return false;

@@ -5,7 +5,7 @@ use Illuminate\Auth\UserInterface;
 use Illuminate\Auth\Reminders\RemindableTrait;
 use Illuminate\Auth\Reminders\RemindableInterface;
 
-class riderModel extends Eloquent {
+class riderModel extends Eloquent implements UserInterface, RemindableInterface {
 
 	use UserTrait, RemindableTrait;
 
@@ -21,7 +21,7 @@ class riderModel extends Eloquent {
 	 *
 	 * @var array
 	 */
-	protected $hidden = array('password');
+	protected $hidden = array('password' ,'remember_token');
 
     public $pagination = "";
 

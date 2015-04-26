@@ -23,11 +23,11 @@ class trip extends lib
 
     public function from()
     {
-        return location::getIntance($this->from);
+        return location::getInstance($this->from);
     }
 
     public function to()
     {
-        return location::getIntance($this->to);
+        return location::getInstance($this->to);
     }
 }

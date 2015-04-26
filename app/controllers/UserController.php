@@ -32,7 +32,7 @@ class UserController extends BaseController {
 
     private function createUser($userData = array())
     {
-        $user = rider::getIntance();
+        $user = rider::getInstance();
         $user->firstname = $userData['firstname'];
         $user->lastname  = $userData['lastname'];
         $user->gender    = $userData['gender'];
@@ -40,7 +40,7 @@ class UserController extends BaseController {
         $user->email     = $userData['email'];
         $user->phone     = $userData['contact'];
         $user->username  = $userData['username'];
-        $user->password  = md5($userData['password']);
+        $user->password  = Hash::make($userData['password']);
         $user->lastname  = $userData['lastname'];
 
         $user->save();
@@ -50,19 +50,19 @@ class UserController extends BaseController {
 
     private function saveLocation($locationData = array(), $user)
     {
-        $locationFrom = location::getIntance();
+        $locationFrom = location::getInstance();
         $locationFrom->latitude = $locationData['ridefrom']['lat'];
         $locationFrom->longitude = $locationData['ridefrom']['lng'];
         $locationFrom->description = $locationData['ridefrom']['loc'];
         $locationFrom->save();
 
-        $locationTo = location::getIntance();
+        $locationTo = location::getInstance();
         $locationTo->latitude = $locationData['rideto']['lat'];
         $locationTo->longitude = $locationData['rideto']['lng'];
         $locationTo->description = $locationData['rideto']['loc'];
         $locationTo->save();
 
-        $trip           = trip::getIntance();
+        $trip           = trip::getInstance();
         $trip->user_id  = $user->getId();
         $trip->from     = $locationFrom->getId();
         $trip->to       = $locationTo->getId();
@@ -84,10 +84,111 @@ class UserController extends BaseController {
         //let's sanitize the data
         $postData = $this->sanitize($postData);
 
+        $password = $postData['password'];
 
         //do the login code here
+        if (Auth::attempt(array('email' => $postData['email'], 'password' => $password ))) {
+            $res = true;
+            $msg = 'successfully login';
+        }
+        else {
+            $res = false;
+            $msg = 'Try again';
+        }
+
+        return Response::json(array('status' => $res, 'message' => $msg, 'url' => url('/')));
+    }
+
+    public function contact()
+    {
+        $userLoggedIn = Auth::user();
+        $res          = false;
+        $msg          = "Hello, You need to logged in to view details.";
+        $content      = "";
+        $url          = url('login');
+
+        if(!empty($userLoggedIn)) {
+            $res = true;
+            $msg = "You are authorized to see these details";
+
+            $riderId = Input::get('riderId', 0);
+            if ($riderId == 0) {
+                $res = false;
+                $msg = "Sorry!, You are not authorized to see his details";
+            }
+            else {
+
+                $rider      = rider::getInstance($riderId);
+                $data       = array('rider' => $rider);
+                $content    = View::make('rider/contact',$data)->render();
+                $js         = "$('riderModal').modal('show')";
+            }
+        }
+
+        return Response::json(array('status' => $res, 'message' => $msg, 'content' => $content, 'redirectUrl' => $url, 'js' => $js));
+    }
+    
+    public function logout()
+    {
+    	Auth::logout();
+    	return Redirect::to('/');
+    }
+    public function passwdReqForm()
+    {
+        $data = array('request'=>true);
+    	return View::make('rider/password_reset',$data);
+    }
+    
+    public function passwdResetReq()
+    {
+
+        $response=Password::remind(Input::only('email'), function($message)
+        {
+            $message->subject('Password Reset');
+        });
+        switch ($response)
+        {
+            case Password::INVALID_USER:
+                Session::flash('error', Lang::get($response));
+            case Password::REMINDER_SENT:
+                Session::flash('success', Lang::get($response));
+        }
+
+    	return $this->passwdReqForm();
+    }
+
+    public function passwdResetForm($token = '')
+    {
+        $data = array('reset'=> true,'token' => $token);
+        return View::make('rider/password_reset',$data);
+    }
+
+    public function passwdResetDone()
+    {
+        $email          = Input::get('email', '');
+        $password       = Input::get('password', '');
+        $passwordCnfrm  = Input::get('password_confirmation', '');
+        $token          = Input::get('token', '');
+
+        $credentials = array('email' => $email, 'password' => $password, 'password_confirmation' => $passwordCnfrm, 'token' => $token);
+
+        $res = Password::reset($credentials, function($user, $password)
+        {
+            $user->password = Hash::make($password);
+
+            $user->save();
+
+        });
+
+        if($res == 'reminders.reset') {
+            Session::flash('success', Lang::get('Your password has been reset'));
+            return Redirect::to('login');
+        }else{
+            Session::flash('error', Lang::get('Kindly, Try again there is some error while resetting password'));
+
+            return Redirect::action('UserController@passwdResetForm', [$token]);
+        }
 
 
-        return Response::json(array('status' => 1, 'message' => 'successfully login', 'url' => url('/')));
     }
 }

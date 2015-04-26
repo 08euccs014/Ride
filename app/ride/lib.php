@@ -25,7 +25,7 @@ class lib
         $this->reset();
     }
 
-    public static function getIntance($id = 0, $bindData = array())
+    public static function getInstance($id = 0, $bindData = array())
     {
         $className = static::$name;
 
