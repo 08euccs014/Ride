@@ -30,9 +30,44 @@ class riderModel extends Eloquent implements UserInterface, RemindableInterface 
         return $this->table;
     }
 
-    public function getRiders()
+    public function getRiders($filters = array())
     {
-        $riders = $this->select('*')->where('group', '=', 0)->paginate(10);
+    	$user = Auth::user();
+    	try{
+		if(!empty($filters)) {
+			$from 	= App::make('locationModel')->getRecords($filters['ridefrom']['lat'],$filters['ridefrom']['lng']);
+			$to   		= App::make('locationModel')->getRecords($filters['rideto']['lat'],$filters['rideto']['lng']);
+           
+			if ( empty($from) || empty($to) ){
+				throw new Exception('No User Available');
+			}
+
+			foreach ($from as $loc) {
+           		$startPoints[] = $loc->id;
+			}
+			foreach ($to as $loc) {
+				$endPoints[] = $loc->id;
+			}
+
+			$riderRecords = App::make('tripModel')->getRidersWithin($startPoints, $endPoints);
+			
+			if ( empty($riderRecords) ){
+				throw new Exception('No User Available');
+			}
+
+			foreach ($riderRecords as $rider) {
+				$riderIds[] = $rider->user_id;
+			}
+
+			$riders = $this->select('*')->whereIn('id', $riderIds)->where('group', '=', 0)->paginate(10);
+		}
+	    else {
+			$riders = $this->select('*')->where('group', '=', 0)->paginate(10);
+		}
+    	}
+    	catch (Exception $e) {
+    		$riders = array();
+    	}
 
         if(!empty($riders)) {
             $this->pagination = $riders->links();

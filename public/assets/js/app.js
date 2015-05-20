@@ -43,20 +43,21 @@ function googleAdresses(object, result) {
 
 initialize();
 
-function ajaxRequest(actionUrl, data, method, reponse, successCallback, errorCallback)
+function ajaxRequest(actionUrl, data, method, response, successCallback, errorCallback)
 {
 
     var request = $.ajax({
         url: actionUrl,
         method: method,
         data: data,
-        dataType: reponse
+        dataType: response
     });
 
     request.done(function( response ) {
 
         if(successCallback == undefined) {
            console.log(response);
+           return true;
         }
 
         return successCallback(response);
@@ -66,8 +67,41 @@ function ajaxRequest(actionUrl, data, method, reponse, successCallback, errorCal
     request.fail(function( jqXHR, textStatus ) {
         if(errorCallback == undefined) {
             console.log("Request failed: " + textStatus);
+            return false;
         }
 
         return errorCallback(textStatus);
     });
+}
+
+function openDialog(actionUrl)
+{
+    ajaxRequest(actionUrl, {}, 'POST', 'json', function(response){
+
+        if (response.status) {
+            $('body').append();
+        }
+
+    });
+}
+
+function contactRider(actionUrl, riderId)
+{
+    ajaxRequest(actionUrl, {riderId : riderId}, 'POST', 'json', function(response){
+
+        if (response.status == 1) {
+        	$('#riderModal').remove();
+            $('body').append(response.content);
+            eval(response.js);
+        }
+        else {
+            window.location = response.redirectUrl;
+        }
+
+    });
+}
+
+function resetFilter()
+{
+	window.location = window.base_url;
 }

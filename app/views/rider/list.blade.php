@@ -1,4 +1,17 @@
 <div>
+	@if( !empty($filters) )
+		<div class="alert alert-info" id="resetFilter">
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+			  <span aria-hidden="true">&times;</span>
+			</button>
+			<h4>Showing Results ::  From - {{ $filters['ridefrom']['loc'] }},  To - {{ $filters['rideto']['loc'] }} </h4>
+			<button class="btn btn-info" onClick="$('#resetFilter').alert('close'); return false;">
+				Reset
+			</button>
+				
+		</div>
+	@endif
+	@if(!empty($riders))
 	<ul class="rider-list">
 		@foreach($riders as $rider)
 		<?php
@@ -39,8 +52,17 @@
 			<div class="col-sm-3">
 				<button class="btn btn-primary gap-top-45" onClick="contactRider('{{ url('ajax/rider/contact') }}', {{$rider->id}});">Contact Me</button>
 			</div>
-			
 		</li>
 		@endforeach
 	</ul>
+	@else
+	<div class="row">
+		<h3 class="text-center">Sorry, there is no users matching your criteria.</h3>
+	</div>
+	@endif
 </div>
+<script>
+$('#resetFilter').on('closed.bs.alert', function () {
+	resetFilter();
+})
+</script>

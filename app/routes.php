@@ -27,4 +27,5 @@ Route::get('password/reset/{token}', 'UserController@passwdResetForm');
 Route::post('password/resetdone', 'UserController@passwdResetDone');
 
 
+
 Route::post('ajax/rider/contact', 'UserController@contact');

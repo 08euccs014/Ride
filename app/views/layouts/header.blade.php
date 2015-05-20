@@ -25,7 +25,8 @@ if($user == null) {
 					<li> <a href="{{ url('logout') }}"><i class="glyphicon glyphicon-off"></i>&nbsp;&nbsp;Logout</a></li>
 				</ul>
             </li>
-            @endif 
+            @endif
+          
           </ul>
 		</nav>
 </div>

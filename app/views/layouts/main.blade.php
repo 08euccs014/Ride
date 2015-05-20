@@ -12,6 +12,9 @@
 	{{ HTML::style('assets/css/app.css') }}
 	{{ HTML::script('assets/js/jquery.min.js') }}
 	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true"></script>
+	<script>
+		window.base_url = '{{ url('/') }}';
+	</script>
 </head>
 <body>
 	<div class="container">

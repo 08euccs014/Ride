@@ -103,9 +103,10 @@ class UserController extends BaseController {
     {
         $userLoggedIn = Auth::user();
         $res          = false;
-        $msg          = "Hello, You need to logged in to view details.";
+        $msg          = "Hi fella, You need to logged in to view details.";
         $content      = "";
         $url          = url('login');
+        $js 				= "";
 
         if(!empty($userLoggedIn)) {
             $res = true;
@@ -115,16 +116,25 @@ class UserController extends BaseController {
             if ($riderId == 0) {
                 $res = false;
                 $msg = "Sorry!, You are not authorized to see his details";
+                Session::put('message', $msg);
             }
             else {
 
                 $rider      = rider::getInstance($riderId);
-                $data       = array('rider' => $rider);
-                $content    = View::make('rider/contact',$data)->render();
-                $js         = "$('riderModal').modal('show')";
+                if ($rider->gender != $userLoggedIn->gender) {
+                	$msg = "Sorry!, Only same gender user are allowed to view this profile.";
+                	$content    = View::make('rider/contact', array('error'=> $msg))->render();
+                }
+                else {
+	           	    $data       = array('rider' => $rider);
+	                $content    = View::make('rider/contact',$data)->render();
+                }
+                $js         = "$('#riderModal').modal('show');";
             }
         }
-
+		else{
+			Session::put('message', $msg);
+		}
         return Response::json(array('status' => $res, 'message' => $msg, 'content' => $content, 'redirectUrl' => $url, 'js' => $js));
     }
     
@@ -186,7 +196,7 @@ class UserController extends BaseController {
         }else{
             Session::flash('error', Lang::get('Kindly, Try again there is some error while resetting password'));
 
-            return Redirect::action('UserController@passwdResetForm', [$token]);
+            return Redirect::action('UserController@passwdResetForm', array($token));
         }
 
 

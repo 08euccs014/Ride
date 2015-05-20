@@ -48,22 +48,22 @@ Log::useDailyFiles(storage_path().'/logs/laravel.log');
 |
 */
 
-App::error(function(Exception $exception, $code)
-{
-	Log::error($exception);
+// App::error(function(Exception $exception, $code)
+// {
+// 	Log::error($exception);
 
-    return View::make('error/server_error');
-});
+//     return View::make('error/server_error');
+// });
 
 /*
  * listen to php fatal errors
  */
-App::fatal(function($exception)
-{
-    Log::error($exception);
+// App::fatal(function($exception)
+// {
+//     Log::error($exception);
 
-    return View::make('error/server_error');
-});
+//     return View::make('error/server_error');
+// });
 
 App::missing(function($exception)
 {

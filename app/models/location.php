@@ -29,4 +29,15 @@ class locationModel extends Eloquent {
         return $this->table;
     }
 
+    
+    public function getRecords($lat, $lng, $range = 5)
+    {
+		$query = "SELECT id, ( 6371 * acos( cos( radians($lat) ) * cos( radians( latitude ) ) * cos( radians(longitude ) - radians($lng) ) + sin( radians($lat) ) * sin( radians( latitude ) ) ) ) AS distance FROM locations HAVING distance < $range ORDER BY distance";
+		
+        //To search by kilometers instead of miles, replace 3959 with 6371.
+        $locations = DB::select($query);
+
+        return $locations;
+    }
 }
+

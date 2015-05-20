@@ -29,4 +29,11 @@ class tripModel extends Eloquent {
         return $this->table;
     }
 
+    public function getRidersWithin($startPoints, $endPoints)
+    {
+    	$riders = $this->select('user_id')->whereIn('from', $startPoints)->whereIn('to', $endPoints)->get()->all();
+
+    	return $riders;
+    }
+
 }
