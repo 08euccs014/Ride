@@ -17,11 +17,19 @@
 		<?php
 		$id = $rider->id;
 		$rider = rider::getInstance($id);
-		$trip = $rider->getTrip(); ?>
+		$trip = $rider->getTrip(); 
+
+		switch($rider->gender) {
+			case 'M' : $image = 'male-rider'; break;
+			case 'F' : $image = 'female-rider'; break;
+			default  : $image = 'male-passenger'; break;
+		}
+
+		?>
 		<li class="col-sm-12">
 			<div class="col-sm-2">
 				<div class="img-container img-circle gap-top-20">
-				<img class="" src="{{ url('assets/image/male-passenger.png') }}" />
+				<img class="" src="{{ url('assets/image/'.$image.'.png') }}" />
 				</div>
 			</div>
 			<div class="col-sm-7">
