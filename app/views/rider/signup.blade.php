@@ -91,17 +91,17 @@
 			    </div>
 			</div>
 			
-			<div class="form-group">
-				<label for="ridefrom" class="col-sm-3 control-label">Middle Stops</label>
-				<div class="col-sm-9 form-inlable">
-				<span class="pull-right">Add middle stops to get more rides</span>
-					<hr/>
-					<i class="glyphicon glyphicon-map-marker"></i>
-					<input type="text" class="form-control google-mapper hide" name="userdata[ridemiddle][loc]" placeholder="middle stops" data-map-latitude='0' data-map-longitude='0' />
-					<input type="hidden" class="google-mapper-lat" name="userdata[ridemiddle][lat]" value="0" />
-                    <input type="hidden" class="google-mapper-lng" name="userdata[ridemiddle][lng]" value="0" />
-			    </div>
-			</div>
+<!-- 			<div class="form-group"> -->
+<!-- 				<label for="ridefrom" class="col-sm-3 control-label">Middle Stops</label> -->
+<!-- 				<div class="col-sm-9 form-inlable"> -->
+<!-- 				<span class="pull-right">Add middle stops to get more rides</span> -->
+<!-- 					<hr/> -->
+<!-- 					<i class="glyphicon glyphicon-map-marker"></i> -->
+<!-- 					<input type="text" class="form-control google-mapper hide" name="userdata[ridemiddle][loc]" placeholder="middle stops" data-map-latitude='0' data-map-longitude='0' /> -->
+<!-- 					<input type="hidden" class="google-mapper-lat" name="userdata[ridemiddle][lat]" value="0" /> -->
+<!--                     <input type="hidden" class="google-mapper-lng" name="userdata[ridemiddle][lng]" value="0" /> -->
+<!-- 			    </div> -->
+<!-- 			</div> -->
 			
 			<div class="form-group">
 			    <label for="rideto" class="col-sm-3 control-label">Ride To</label>
