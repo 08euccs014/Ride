@@ -39,7 +39,7 @@
             <h4>Write here what we think ..... if we think :P</h4>
         </div>
         <div class="aboutus-footer">
-            <h4>Feel free to contact us at <a href="mailto:er.magrawal@gmail.com?subject=Feedback">Support Team</a></h4>
+            <h4>Feel free to contact us at <a href="mailto:support@joinmyway.net?subject=Feedback">Support Team</a></h4>
         </div>
     </div>
 
