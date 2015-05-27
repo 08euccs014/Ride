@@ -6,7 +6,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Laravel PHP Framework</title>
+	<title>Join My Way : Best Ride Pooling Initiative</title>
 	{{ HTML::style('assets/css/bootstrap.min.css') }}
 	{{ HTML::style('assets/css/override.css') }}
 	{{ HTML::style('assets/css/app.css') }}
