@@ -1,6 +1,8 @@
 @include('layouts/header')
 @include('layouts/notification')
 @include('layouts/footer')
+@include('layouts/analytics')
+@include('layouts/tag')
 
 <!doctype html>
 <html lang="en">
@@ -17,6 +19,8 @@
 	</script>
 </head>
 <body>
+@yield('tag')
+
 	<div class="container">
 		@yield('header')
 		@yield('notification')
@@ -28,4 +32,5 @@
 
 {{ HTML::script('assets/js/bootstrap.min.js') }}
 {{ HTML::script('assets/js/app.js') }}
+@yield('analytics')
 </html>
