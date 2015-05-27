@@ -2,7 +2,7 @@
 @include('layouts/notification')
 @include('layouts/footer')
 @include('layouts/analytics')
-@include('layouts/tag')
+@include('layouts/tag_manager')
 
 <!doctype html>
 <html lang="en">
