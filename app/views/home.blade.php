@@ -5,7 +5,9 @@
 	<!-- Search Form -->	
 	<div class="col-sm-offset-3 col-sm-5">
 	
-		<h1 class="text-center gap-ver-10">Join My Way</h1>
+		<div class="text-center gap-ver-10">
+		<img src="{{ url('assets/image/join_my_way.png') }}" style="height:53px; opacity:0.75"/>
+		</div>
 		<form class="form-horizontal gap-top-20 row" action="{{ url('/') }}" method="GET">
 			<div class="form-group">
 			    <label for="ridefrom" class="col-sm-2 control-label">From</label>
