@@ -105,3 +105,34 @@ function resetFilter()
 {
 	window.location = window.base_url;
 }
+
+function routeUrl(url)
+{
+	url = window.base_url + url;
+	return url;
+}
+
+function sendFeedback(obj)
+{ 
+	$(obj).button('loading');
+	var msg = $('#feedback').val();
+	var from = $('#from').val();
+	var url = routeUrl('/sendfeedback');
+	ajaxRequest(url, {feedback : msg, from : from}, 'POST', 'json', function(response){
+		if(response.status == 1) {
+			$('#sendFeedback').button('reset');
+			$('#feedback').val('');
+			$('#from').val('');
+			alert('Thanks for your feedback');
+		}
+		else {
+			alert('Sorry, there is some error occur.\n\nYour feedback is very important, please mail us directly.\n\nThank You');
+			$('#sendFeedback').button('reset');
+		}
+	}, function(response){
+		alert('Sorry, there is some error occur.\n\nYour feedback is very important, please mail us directly.\n\nThank You');
+		$('#sendFeedback').button('reset');
+	});
+	
+	return false;
+}

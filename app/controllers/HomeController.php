@@ -33,5 +33,18 @@ class HomeController extends BaseController {
     {
         return View::make('informations/aboutus');
     }
+    
+    public function sendFeedback()
+    {
+    	$msg = Input::get('feedback', '');
+    	$from = Input::get('from', '');
+    	try {
+    		rFactory::sendMail('emails.feedback', array('content' => $msg), array('support@joinmyway.net', 'Feedback'), array($from, 'Feedback'), 'Feedback');
+    	}
+    	catch(Exception $e) {
+    		return Response::json(array('status' => 0));
+    	}
+    	return Response::json(array('status' => 1));
+    }
 
 }

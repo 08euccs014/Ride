@@ -26,6 +26,14 @@ body {
 .gap-top-45 {
 	margin-top : 45px;
 }
+.gap-bottom-10
+{
+	margin-bottom : 10px;
+}
+.gap-bottom-20
+{
+	margin-bottom : 20px;
+}
 
 ul.rider-list {
 	list-style : none;

@@ -20,7 +20,6 @@
 </head>
 <body>
 @yield('tag')
-
 	<div class="container">
 		@yield('header')
 		@yield('notification')
