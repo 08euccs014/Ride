@@ -13,6 +13,9 @@
 
 Route::get('/', 'HomeController@home');
 Route::get('aboutus', 'HomeController@aboutus');
+Route::get('privacy_policies', 'HomeController@privacyPolicies');
+Route::get('term_and_conditions', 'HomeController@termConditions');
+
 
 
 Route::get('signup', 'UserController@signupForm');

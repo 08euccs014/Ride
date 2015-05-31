@@ -46,5 +46,15 @@ class HomeController extends BaseController {
     	}
     	return Response::json(array('status' => 1));
     }
+    
+    public function termConditions()
+    {
+    	return View::make('informations/term_conditions');
+    }
+    
+    public function privacyPolicies()
+    {
+    	return View::make('informations/privacy_policies');
+    }
 
 }

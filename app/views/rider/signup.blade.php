@@ -128,6 +128,12 @@
             </div>
 			
 			
+			 <div class="checkbox">
+			    <label  class="col-sm-offset-3 col-sm-9">
+			      <input type="checkbox"  id="termcondition" checked> I Agree with <a href="{{ url('term_and_conditions') }}" target="_blank">terms&conditions</a>.
+			    </label>
+			  </div>
+
 			<div class="form-group gap-top-20">
 				<div class="col-sm-offset-3 col-sm-9">
 				<button type="submit" class="btn btn-primary btn-block">Continue&nbsp;<i class="glyphicon glyphicon-menu-right"></i></button>
@@ -142,6 +148,10 @@
 
 $('#signupform').on('submit', function() {
 
+	if ( !$('#termcondition').is(':checked') ) {
+		alert('Kindly approve terms & conditions to proceed. Thank You');
+		return false;
+	}
     var actionUrl= $('#signupform').attr('action');
     var postData = $('#signupform').serialize();
 
