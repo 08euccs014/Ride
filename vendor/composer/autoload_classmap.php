@@ -8,6 +8,7 @@ $baseDir = dirname($vendorDir);
 return array(
     'BaseController' => $baseDir . '/app/controllers/BaseController.php',
     'CreateLocationTable' => $baseDir . '/app/database/migrations/2015_04_19_044207_create_location_table.php',
+    'CreatePasswordRemindersTable' => $baseDir . '/app/database/migrations/2015_04_24_201558_create_password_reminders_table.php',
     'CreateRiderTable' => $baseDir . '/app/database/migrations/2015_04_19_045721_create_rider_table.php',
     'DatabaseSeeder' => $baseDir . '/app/database/seeds/DatabaseSeeder.php',
     'HomeController' => $baseDir . '/app/controllers/HomeController.php',
