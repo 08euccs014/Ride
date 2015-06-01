@@ -81,10 +81,15 @@ App::missing(function($exception)
 | to the user if maintenance mode is in effect for the application.
 |
 */
-
 App::down(function()
 {
-	return Response::make("Be right back!", 503);
+    $ip = Request::getClientIp();
+    $allowed = array('122.161.27.38');
+
+    if(!in_array($ip, $allowed))
+    {
+        return Response::make('We will be right back, Sorry for inconvience.', 503);
+    }
 });
 
 
