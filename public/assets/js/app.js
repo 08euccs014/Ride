@@ -136,3 +136,29 @@ function sendFeedback(obj)
 	
 	return false;
 }
+
+function sendContactMsg(obj)
+{
+	$(obj).button('loading');
+	var msg = $('#contactMsg').val();
+	var userId = $('#userId').val();
+	var url = routeUrl('/ajax/rider/send_contact_msg');
+	ajaxRequest(url, {msg : msg, userId : userId}, 'POST', 'json', function(response){
+		if(response.status == 1) {
+			$('#sendContactMsg').button('reset');
+			$('#sendContactMsg').parents('.modal-body').html('Your message has been sent.');
+		}
+		else {
+			alert('Sorry, there is some error occur.');
+			$('#sendContactMsg').button('reset');
+		}
+		setTimeout(function(){
+			$('#riderModal').modal('hide');
+		}, 2000);
+	}, function(response){
+		alert('Sorry, there is some error occur.');
+		$('#sendContactMsg').button('reset');
+	});
+	
+	return false;
+}

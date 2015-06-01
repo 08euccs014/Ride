@@ -26,7 +26,6 @@ class rider extends lib
 
     public function reset()
     {
-        $this->firstname = '';
         $this->username = '';
         $this->firstname = '';
         $this->lastname = '';

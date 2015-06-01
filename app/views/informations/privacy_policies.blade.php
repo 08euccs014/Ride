@@ -13,7 +13,7 @@
 	           </div>
 			<div class="gap-top-20">
 	        	<h4><strong>How we use Information.</strong></h4> 
-				<p>We published the information provided by you to our website , inorder to reach you by other users. They need contact you to reach you.</p>
+				<p>We use the information provided by you inorder to reach you.</p>
 			</div>
         </div>
 

@@ -193,12 +193,29 @@ class UserController extends BaseController {
         if($res == 'reminders.reset') {
             Session::flash('success', Lang::get('Your password has been reset'));
             return Redirect::to('login');
-        }else{
+        }
+		else{
             Session::flash('error', Lang::get('Kindly, Try again there is some error while resetting password'));
 
             return Redirect::action('UserController@passwdResetForm', array($token));
         }
-
-
     }
+
+    public function sendContactMsg()
+    {
+    	$userId = Input::get('userId', 0);
+    	$contactMsg = Input::get('msg', '');
+
+    	$rider = rider::getInstance($userId);
+
+    	try {
+    		rFactory::sendMail('emails.contact_msg', array('content' => $contactMsg), array($rider->email, $rider->firstname), array('support@joinmyway.net', 'Your Team'), 'You got a new message from JoinMyWay');
+    	}
+    	catch(Exception $e) {
+    		return Response::json(array('status' => 0));
+    	}
+    	return Response::json(array('status' => 1));
+    	
+    	
+    } 
 }

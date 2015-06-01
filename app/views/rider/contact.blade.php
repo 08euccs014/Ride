@@ -10,27 +10,18 @@
       		{{ $error }}
       	@else
       	<div class="row">
-      	<div class="col-sm-12">
-	      <div class="form-group row">
-		    <label class="col-sm-4 control-label">Name</label>
-		    <div class="col-sm-8">
-		      {{ $rider->firstname }} {{ $rider->lastname }}
-		    </div>
-		  </div>
-	      <div class="form-group row">
-		    <label class="col-sm-4 control-label">Contact Number</label>
-		    <div class="col-sm-8">
-		      {{ $rider->phone }}
-		    </div>
-		  </div>
-		  <div class="form-group row">
-		    <label class="col-sm-4 control-label">Email Me</label>
-		    <div class="col-sm-8">
-		     {{ $rider->email }}
-		    </div>
-		  </div>
+			<div class="col-sm-12">
+				<div class="form-group">
+					<textarea cols="68" rows="5" placeholder="write your message here" id="contactMsg"></textarea>
+				</div>
+				<div class="form-group">
+					<button type="button" id="sendContactMsg" data-loading-text="Sending ..." class="btn btn-primary pull-right" autocomplete="off"  onclick="sendContactMsg(this);">
+						Send &nbsp; <i class="glyphicon glyphicon-send"></i>
+					</button>
+				</div>
+			</div>
 		</div>
-	</div>
+		<input type="hidden" value="{{ $rider->id }}" id="userId"/>
 	@endif
     </div>
   </div>

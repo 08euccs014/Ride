@@ -21,7 +21,7 @@ if($user == null) {
             <li role="presentation" class="dropdown">
 	            <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">Hi, {{ ucfirst($rider->firstname) }}  <span class="caret"></span></a>
 				<ul class="dropdown-menu" role="menu">
-					<li><a href="{{ url('profile') }}"><i class="glyphicon glyphicon-user"></i>&nbsp;&nbsp;Profile</a></li>
+					{{--<li><a href="{{ url('profile') }}"><i class="glyphicon glyphicon-user"></i>&nbsp;&nbsp;Profile</a></li>--}}
 					<li> <a href="{{ url('logout') }}"><i class="glyphicon glyphicon-off"></i>&nbsp;&nbsp;Logout</a></li>
 				</ul>
             </li>

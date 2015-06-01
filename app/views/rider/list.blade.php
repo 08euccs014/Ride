@@ -34,7 +34,7 @@
 			</div>
 			<div class="col-sm-7">
 			
-				<h3 class="rider-name">{{ $rider->firstname }} {{ $rider->lastname }}</h3>
+				<h3 class="rider-name">{{ $rider->firstname }} {{ $rider->lastname }}  (@if($rider->group == 1) passenger @else rider @endif)</h3>
 				
 				<div class="gap-top-10">
 					<div class="vehicle-details">

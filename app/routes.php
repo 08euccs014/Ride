@@ -31,3 +31,5 @@ Route::post('password/resetdone', 'UserController@passwdResetDone');
 
 Route::post('sendfeedback', 'HomeController@sendFeedback');
 Route::post('ajax/rider/contact', 'UserController@contact');
+Route::post('ajax/rider/send_contact_msg', 'UserController@sendContactMsg');
+

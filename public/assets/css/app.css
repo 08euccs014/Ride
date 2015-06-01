@@ -42,6 +42,9 @@ ul.rider-list {
 	padding : 15px;
 	border-bottom : 1px solid #DDD;
 }
+.rider-list li:last-child {
+	border-bottom : none;
+}
 .rider-list .rider-name {
 	text-transform : capitalize;
 }
