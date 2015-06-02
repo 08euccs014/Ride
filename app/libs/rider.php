@@ -46,5 +46,12 @@ class rider extends lib
         $trip       = trip::getInstance($trip->id);
         return $trip;
     }
+    
+    public function getMessages()
+    {
+    	$messageModel  = App::make('messageModel');
+    	$messages       = $messageModel->where('receiver_id', '=', $this->id)->get()->all();    	
+    	return $messages; 
+    }
 
 }

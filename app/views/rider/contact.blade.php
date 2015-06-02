@@ -21,7 +21,8 @@
 				</div>
 			</div>
 		</div>
-		<input type="hidden" value="{{ $rider->id }}" id="userId"/>
+		<input type="hidden" value="{{ $rider->id }}" id="receiverId"/>
+		<input type="hidden" value="{{ $userLoggedIn->id }}" id="senderId"/>
 	@endif
     </div>
   </div>

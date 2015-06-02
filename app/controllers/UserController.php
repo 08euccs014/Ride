@@ -126,7 +126,7 @@ class UserController extends BaseController {
                 	$content    = View::make('rider/contact', array('error'=> $msg))->render();
                 }
                 else {
-	           	    $data       = array('rider' => $rider);
+	           	    $data       = array('rider' => $rider, 'userLoggedIn' => $userLoggedIn);
 	                $content    = View::make('rider/contact',$data)->render();
                 }
                 $js         = "$('#riderModal').modal('show');";
@@ -203,19 +203,28 @@ class UserController extends BaseController {
 
     public function sendContactMsg()
     {
-    	$userId = Input::get('userId', 0);
+    	$receiverId = Input::get('receiverId', 0);
+    	$senderId = Input::get('senderId', 0);
     	$contactMsg = Input::get('msg', '');
 
-    	$rider = rider::getInstance($userId);
-
     	try {
-    		rFactory::sendMail('emails.contact_msg', array('content' => $contactMsg), array($rider->email, $rider->firstname), array('support@joinmyway.net', 'Your Team'), 'You got a new message from JoinMyWay');
+	    	$message = message::getInstance(0, array('sender_id' => $senderId, 'receiver_id' => $receiverId, 'content' => $contactMsg));
+	    	$message->save();
     	}
     	catch(Exception $e) {
     		return Response::json(array('status' => 0));
     	}
     	return Response::json(array('status' => 1));
-    	
-    	
     } 
+    
+    public function displayMessages()
+    {
+		$loggedIn = Auth::user()->id;
+		$rider  = rider::getInstance($loggedIn);
+		$messages = $rider->getMessages();
+		
+    	$data = array('messages'=> $messages);
+    	return View::make('rider/message',$data);
+    	
+    }
 }

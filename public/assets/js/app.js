@@ -141,9 +141,10 @@ function sendContactMsg(obj)
 {
 	$(obj).button('loading');
 	var msg = $('#contactMsg').val();
-	var userId = $('#userId').val();
+	var receiverId = $('#receiverId').val();
+	var senderId = $('#senderId').val();
 	var url = routeUrl('/ajax/rider/send_contact_msg');
-	ajaxRequest(url, {msg : msg, userId : userId}, 'POST', 'json', function(response){
+	ajaxRequest(url, {msg : msg, receiverId : receiverId, senderId : senderId}, 'POST', 'json', function(response){
 		if(response.status == 1) {
 			$('#sendContactMsg').button('reset');
 			$('#sendContactMsg').parents('.modal-body').html('Your message has been sent.');

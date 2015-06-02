@@ -34,6 +34,13 @@ class riderModel extends Eloquent implements UserInterface, RemindableInterface 
     {
     	$user = Auth::user();
     	try{
+    		
+    		
+    	$loggedIn = 0;
+    	if (isset($user)) {
+    		$loggedIn = $user->id;
+    	}
+    		
 		if(!empty($filters)) {
 			$from 	= App::make('locationModel')->getRecords($filters['ridefrom']['lat'],$filters['ridefrom']['lng']);
 			$to   		= App::make('locationModel')->getRecords($filters['rideto']['lat'],$filters['rideto']['lng']);
@@ -56,13 +63,15 @@ class riderModel extends Eloquent implements UserInterface, RemindableInterface 
 			}
 
 			foreach ($riderRecords as $rider) {
-				$riderIds[] = $rider->user_id;
+				if ($loggedIn != $rider->user_id) {
+					$riderIds[] = $rider->user_id;
+				}
 			}
 
 			$riders = $this->select('*')->whereIn('id', $riderIds)->paginate(10);
 		}
 	    else {
-			$riders = $this->select('*')->paginate(10);
+			$riders = $this->select('*')->where('id', '!=', $loggedIn)->paginate(10);
 		}
     	}
     	catch (Exception $e) {

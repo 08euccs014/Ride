@@ -18,6 +18,7 @@ if($user == null) {
             <li role="presentation"><a href="{{ url('login') }}">Login</a></li>
             <li role="presentation"><a href="{{ url('signup') }}">Sign Up</a></li>
             @else
+            <li role="presentation"><a href="{{ url('messages') }}"><i class="glyphicon glyphicon-envelope"></i> Messages</a></li>
             <li role="presentation" class="dropdown">
 	            <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">Hi, {{ ucfirst($rider->firstname) }}  <span class="caret"></span></a>
 				<ul class="dropdown-menu" role="menu">

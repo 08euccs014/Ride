@@ -31,5 +31,11 @@ Route::post('password/resetdone', 'UserController@passwdResetDone');
 
 Route::post('sendfeedback', 'HomeController@sendFeedback');
 Route::post('ajax/rider/contact', 'UserController@contact');
-Route::post('ajax/rider/send_contact_msg', 'UserController@sendContactMsg');
 
+Route::get('cron/trigger', 'CronController@trigger');
+
+Route::group(array('before' => 'auth'), function()
+{
+	Route::post('ajax/rider/send_contact_msg', 'UserController@sendContactMsg');
+	Route::get('messages', 'UserController@displayMessages');
+});
