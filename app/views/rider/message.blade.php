@@ -18,7 +18,7 @@
 			@endforeach
 			
 		@else
-			<h3>Right now, you don't have any mesasge.</h3>
+			<h3>Right now, you don't have any message.</h3>
 		@endif
 	</div>
 	
