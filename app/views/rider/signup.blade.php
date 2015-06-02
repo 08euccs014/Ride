@@ -50,13 +50,8 @@
 			</div>
 			
 			<div class="form-group">
-			    <label for="rideto" class="col-sm-3 control-label">Contact</label>
-			    <div class="col-sm-9 form-inlable">
-			      <input type="email" class="form-control" name="userdata[email]" placeholder="e-mail">
-			       <i class="glyphicon glyphicon-envelope"></i>
-			    </div>
-			    <div class="col-sm-offset-3 col-sm-9 text-center gap-ver-10">And / Or</div>
-			     <div class="col-sm-offset-3 col-sm-9 form-inlable">
+			    <label for="rideto" class="col-sm-3 control-label">Contact</label>			    
+			     <div class="col-sm-9 form-inlable">
 			      <input type="text" class="form-control" name="userdata[contact]" placeholder="contact number">
 			       <i class="glyphicon glyphicon-earphone"></i>
 			    </div>
@@ -113,6 +108,14 @@
 			    </div>
 			</div>
 
+			<div class="form-group">
+			    <label for="rideto" class="col-sm-3 control-label">Email</label>
+			    <div class="col-sm-9 form-inlable">
+			      <input type="email" class="form-control" name="userdata[email]" placeholder="e-mail">
+			       <i class="glyphicon glyphicon-envelope"></i>
+			    </div>
+			  </div>
+			
 			<div class="form-group">
                 <label for="username" class="col-sm-3 control-label">Username</label>
                 <div class="col-sm-9">
