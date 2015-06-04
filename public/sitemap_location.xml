@@ -1,16 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
-	  <url> 
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
-	    <loc>http://www.joinmyway.net/</loc>
-	    <loc>http://www.joinmyway.net/aboutus</loc> 
-	    <loc>http://www.joinmyway.net/login</loc> 
-	    <loc>http://www.joinmyway.net/signup</loc> 
+<url>
+  <loc>http://www.joinmyway.net/</loc>
+  <changefreq>daily</changefreq>
+</url>
+<url>
+  <loc>http://www.joinmyway.net/aboutus</loc>
+  <changefreq>daily</changefreq>
+</url>
+<url>
+  <loc>http://www.joinmyway.net/login</loc>
+  <changefreq>daily</changefreq>
+</url>
+<url>
+  <loc>http://www.joinmyway.net/signup</loc>
+  <changefreq>daily</changefreq>
+</url>
  
 
-	    <image:image>
-	       <image:loc>joinmyway.net/assets/image/join_my_way.png</image:loc> 
-	    </image:image>
-
-	</url>
 </urlset>
