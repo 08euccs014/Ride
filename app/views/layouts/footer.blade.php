@@ -24,7 +24,7 @@
 			<a href="{{ url('aboutus') }}" target="_blank">Know About Us</a>
 		</div>
 		<div class="col-md-4 text-center">
-			&copy;All Copyright Reservered @joinmyway.net 
+			&copy;All copyright reserved @joinmyway.net 
 		</div>
 	</div>
 @stop
