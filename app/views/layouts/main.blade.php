@@ -13,7 +13,7 @@
 	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 	<meta name="keywords" content="best ride pool, best ride share, car pool, ride pool, pooling, motorcycle pool, 2 wheeler pool, 4 wheeler pool, want a ride, save fuel, save moeny, join my way, joinmyway, pick me up, ride share, rideshare, share ride" />
 	<meta name="description" content="Join my way is ride pool initiative to help those people who does not have their own vehicle but travel a lot on same way. so it will bring the rider and passenger togather to join their to save money for both rider and passenger. it will save fuel, save money, save environment from pollution. it help reducing commuting time and traffic." />
-
+	<link href="{{ url('assets/image/join-favicon.jpg') }}" rel="shortcut icon" type="image/vnd.microsoft.icon" />
 
 	<title>Join My Way : Best Ride Pooling Initiative</title>
 	{{ HTML::style('assets/css/bootstrap.min.css') }}
