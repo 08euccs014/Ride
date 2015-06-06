@@ -12,6 +12,7 @@
 		</div>
 	@endif
 	@if(!empty($riders))
+	<div class="row">
 	<ul class="rider-list">
 		@foreach($riders as $rider)
 		<?php
@@ -63,6 +64,10 @@
 		</li>
 		@endforeach
 	</ul>
+	</div>
+	<div class="row text-center gap-top-10">
+		{{ $pagination }}
+	</div>
 	@else
 	<div class="row">
 		<h3 class="text-center">Sorry, there is no users matching your criteria.</h3>

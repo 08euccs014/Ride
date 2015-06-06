@@ -68,10 +68,10 @@ class riderModel extends Eloquent implements UserInterface, RemindableInterface 
 				}
 			}
 
-			$riders = $this->select('*')->whereIn('id', $riderIds)->paginate(10);
+			$riders = $this->select('*')->whereIn('id', $riderIds)->paginate(RIDER_PAGINATION);
 		}
 	    else {
-			$riders = $this->select('*')->where('id', '!=', $loggedIn)->paginate(10);
+			$riders = $this->select('*')->where('id', '!=', $loggedIn)->paginate(RIDER_PAGINATION);
 		}
     	}
     	catch (Exception $e) {
@@ -79,7 +79,7 @@ class riderModel extends Eloquent implements UserInterface, RemindableInterface 
     	}
 
         if(!empty($riders)) {
-            $this->pagination = $riders->links();
+            $this->pagination = $riders->appends(array('searchdata' => $filters))->links();
         }
 
         return $riders;
