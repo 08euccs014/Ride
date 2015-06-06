@@ -20,8 +20,8 @@
 		$trip = $rider->getTrip(); 
 
 		switch($rider->gender) {
-			case 'M' : $image = 'male-rider'; break;
-			case 'F' : $image = 'female-rider'; break;
+			case 'M' : $image = ($rider->group == 1) ? 'male-passenger' : 'male-rider'; break;
+			case 'F' : $image = ($rider->group == 1) ? 'female-passenger' : 'female-rider'; break;
 			default  : $image = 'male-passenger'; break;
 		}
 
