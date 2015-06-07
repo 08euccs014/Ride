@@ -68,10 +68,10 @@ class riderModel extends Eloquent implements UserInterface, RemindableInterface 
 				}
 			}
 
-			$riders = $this->select('*')->whereIn('id', $riderIds)->paginate(RIDER_PAGINATION);
+			$riders = $this->select('*')->whereIn('id', $riderIds)->where('verify', '=', 1)->paginate(RIDER_PAGINATION);
 		}
 	    else {
-			$riders = $this->select('*')->where('id', '!=', $loggedIn)->paginate(RIDER_PAGINATION);
+			$riders = $this->select('*')->where('id', '!=', $loggedIn)->where('verify', '=', 1)->paginate(RIDER_PAGINATION);
 		}
     	}
     	catch (Exception $e) {
