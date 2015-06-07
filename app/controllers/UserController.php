@@ -39,7 +39,7 @@ class UserController extends BaseController {
         $user->group    = $userData['group'];
         $user->email     = $userData['email'];
         $user->phone     = $userData['contact'];
-        $user->username  = $userData['username'];
+        $user->username  = $userData['email'];
         $user->password  = Hash::make($userData['password']);
         $user->lastname  = $userData['lastname'];
 

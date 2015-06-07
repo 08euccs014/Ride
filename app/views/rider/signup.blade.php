@@ -6,17 +6,15 @@
 
 		<form id="signupform" action="{{ url('ajax/signup') }}" method="post" class="form-horizontal">
 			<div class="form-group">
-			    <label for="ridefrom" class="col-sm-3 control-label">Do you</label>
+			    <label for="ridefrom" class="col-sm-3 control-label" data-container="body" data-toggle="popover" data-placement="top"  data-trigger="hover" data-html="true" data-content="Choose what you want. <br /> Want a Ride -- be a Passenger. <br /> Want to Drive someone -- be a Rider">Do you</label>
 			     <div class="col-sm-9">
-					<div class="radio">
-						<label>
-						<input type="radio" name="userdata[group]"  value="0" checked>
-						  Offer Ride
-						</label>
-						<label>
-						<input type="radio" name="userdata[group]" value="1">
-						 Want Ride
-						</label>
+					<div class="btn-group" data-toggle="buttons">
+					  <label class="btn btn-default btn-primary">
+					  	<input type="radio" name="userdata[group]"  value="0" autocomplete="off" checked>Offer Ride<small> (Rider)</small>
+					  </label>
+					  <label class="btn btn-default">
+					    <input type="radio" name="userdata[group]" value="1" autocomplete="off">Want Ride<small> (Passenger)</small>
+					  </label>
 					</div>
 				</div>
 			</div>
@@ -115,14 +113,7 @@
 			       <i class="glyphicon glyphicon-envelope"></i>
 			    </div>
 			  </div>
-			
-			<div class="form-group">
-                <label for="username" class="col-sm-3 control-label">Username</label>
-                <div class="col-sm-9">
-                  <input type="text" class="form-control" name="userdata[username]" placeholder="username" />
-                </div>
-            </div>
-
+            
             <div class="form-group">
                 <label for="password" class="col-sm-3 control-label">Password</label>
                 <div class="col-sm-9">
@@ -133,40 +124,20 @@
 			
 			 <div class="checkbox">
 			    <label  class="col-sm-offset-3 col-sm-9">
-			      <input type="checkbox"  id="termcondition" checked> I Agree with <a href="{{ url('term_and_conditions') }}" target="_blank">terms&conditions</a>.
+			      <input type="checkbox"  id="termcondition"  name="termcondition" checked> I Agree with <a href="{{ url('term_and_conditions') }}" target="_blank">terms&conditions</a>.
 			    </label>
 			  </div>
 
 			<div class="form-group gap-top-20">
 				<div class="col-sm-offset-3 col-sm-9">
-				<button type="submit" class="btn btn-primary btn-block">Continue&nbsp;<i class="glyphicon glyphicon-menu-right"></i></button>
+				<button type="submitButton" class="btn btn-primary btn-block">Continue&nbsp;<i class="glyphicon glyphicon-menu-right"></i></button>
 				</div>
 			</div>
 		</form>
 		
 </div>
 </div>
-
-<script>
-
-$('#signupform').on('submit', function() {
-
-	if ( !$('#termcondition').is(':checked') ) {
-		alert('Kindly approve terms & conditions to proceed. Thank You');
-		return false;
-	}
-    var actionUrl= $('#signupform').attr('action');
-    var postData = $('#signupform').serialize();
-
-
-    ajaxRequest(actionUrl, postData, 'POST', 'json', function(response){
-        if(response.status == 1) {
-            window.location = response.url;
-        }
-    }, function(response){alert(response);} );
-
-//stop the normal form submission
-return false;
-});
-</script>
+{{ HTML::script('assets/js/formValidation.min.js') }}
+{{ HTML::script('assets/js/formValidation.bootstrap.min.js') }}
+{{ HTML::script('assets/js/signup.js') }}
 @stop

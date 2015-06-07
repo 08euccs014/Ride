@@ -41,8 +41,6 @@ function googleAdresses(object, result) {
 	$(object).parent().children('.google-mapper-lng').val(longitude);
 }
 
-initialize();
-
 function ajaxRequest(actionUrl, data, method, response, successCallback, errorCallback)
 {
 
@@ -163,3 +161,20 @@ function sendContactMsg(obj)
 	
 	return false;
 }
+
+$(document).ready(function(){
+	
+    $(function () {
+    	  $('[data-toggle="popover"]').popover()
+    });
+	
+	//toggle radio button group
+    $('.btn-group[data-toggle="buttons"] label').on('click', function () {
+	   	 $('.btn-group[data-toggle="buttons"] label').removeClass('btn-primary');
+	   	 $(this).addClass('btn-primary');
+  	});
+
+    //initialize the google map api
+    initialize();
+
+});
