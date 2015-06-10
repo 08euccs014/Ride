@@ -28,6 +28,7 @@ Route::get('password/remind', 'UserController@passwdReqForm');
 Route::post('password/remind/request', 'UserController@passwdResetReq');
 Route::get('password/reset/{token}', 'UserController@passwdResetForm');
 Route::post('password/resetdone', 'UserController@passwdResetDone');
+Route::get('user/verification/{token}', 'UserController@userVerification');
 
 Route::post('sendfeedback', 'HomeController@sendFeedback');
 Route::post('ajax/rider/contact', 'UserController@contact');

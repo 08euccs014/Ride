@@ -1,6 +1,6 @@
 @extends('layouts/main')
 @section('content')
-
+<div class="row">
 @if(isset($request) && $request)
 <div class="col-sm-offset-3 col-sm-5 gap-top-20">
     <form id="loginform" action="{{ url('password/remind/request') }}" method="post"class="form-horizontal">
@@ -59,5 +59,5 @@
     </form>
 </div>
 @endif
-
+</div>
 @stop

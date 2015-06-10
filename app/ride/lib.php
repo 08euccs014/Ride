@@ -1,9 +1,7 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: mohit
- * Date: 19/4/15
- * Time: 2:07 PM
+ * author: er.magrawal@gmail.com
+ * author-url : http://github.com/08euccs014 
  */
 
 class lib
@@ -141,6 +139,8 @@ class lib
             $this->id = $model->id;
         }
 
+        $this->bind($model);
+        
         //if successfully updated then update the cached object also
         self::setCache($this);
 

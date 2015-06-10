@@ -81,6 +81,8 @@ $(document).ready(function() {
         ajaxRequest(actionUrl, postData, 'POST', 'json', function(response){
             if(response.status == 1) {
                 window.location = response.url;
+            }else {
+            	alert(response.message);
             }
         }, function(response){alert(response);} );
     });

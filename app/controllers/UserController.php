@@ -12,11 +12,26 @@ class UserController extends BaseController {
         $postData = Input::get('userdata', array());
 
         //let's sanitize the data
-        $postData = $this->sanitize($postData);
+        try {
+        	$postData = $this->sanitize($postData, array('group', 'gender', 'firstname', 'timefrom', 'timeto', 'ridefrom', 'rideto', 'email', 'password'));
+        }
+        catch (Exception $e) {
+        	return Response::json(array('status' => 0, 'message' => $e->getMessage()));
+        }
+        
+        try {
+	        $user   = $this->createUser($postData);
+	        $this->saveLocation($postData, $user);
+        }
+        catch (Exception $e) {
+        	return Response::json(array('status' => 0, 'message' => $e->getMessage()));
+        }
 
-        $user   = $this->createUser($postData);
-        $this->saveLocation($postData, $user);
-
+		Event::fire('user.signup', array($user));
+        
+        $message = "Hurray! You have been <b>successfully registered</b>. One click <b>verification link</b> has been sent to your email.";
+        Session::put('message', $message);
+        
 	    return Response::json(array('status' => 1, 'message' => 'successfully registered', 'url' => url('/')));
 	}
 
@@ -25,13 +40,34 @@ class UserController extends BaseController {
      * @param array $dirtyData
      * @return array
      */
-    public function sanitize($dirtyData = array())
+    public function sanitize($dirtyData = array(), $requiredData = array())
     {
-        return $dirtyData;
+    	$sanitizedData = array();
+
+    	foreach ($dirtyData as $key => $value) {
+    		if (in_array($key, $requiredData)) {
+    			if ( isset($dirtyData[$key]) && $dirtyData[$key] != null) {
+    				$sanitizedData[$key] = $value;
+    			}
+    			else {
+    				throw new Exception("$key can not be empty", '503');
+    			}
+    		}
+    		$sanitizedData[$key] = $value;
+    	}
+    	 
+        return $sanitizedData;
     }
 
     private function createUser($userData = array())
     {
+		$model = App::make('riderModel');
+		$riders = $model->getRecords(array('email' => array('=' , $userData['email'])));
+		if (!empty($riders)) {
+			$rider = array_pop($riders);
+			 return rider::getInstance($rider->id);
+		}
+    	
         $user = rider::getInstance();
         $user->firstname = $userData['firstname'];
         $user->lastname  = $userData['lastname'];
@@ -42,6 +78,8 @@ class UserController extends BaseController {
         $user->username  = $userData['email'];
         $user->password  = Hash::make($userData['password']);
         $user->lastname  = $userData['lastname'];
+        $currentDate = date('Y-m-d H:i:s');
+        $user->activation =  md5($user->email.$currentDate);
 
         $user->save();
 
@@ -82,12 +120,15 @@ class UserController extends BaseController {
         $postData = Input::get('userdata', array());
 
         //let's sanitize the data
-        $postData = $this->sanitize($postData);
-
-        $password = $postData['password'];
+        try {
+        	$postData = $this->sanitize($postData, array('email', 'password'));
+        }
+        catch (Exception $e) {
+        	return Response::json(array('status' => 0, 'message' => $e->getMessage()));
+        }
 
         //do the login code here
-        if (Auth::attempt(array('email' => $postData['email'], 'password' => $password ))) {
+        if (Auth::attempt(array('email' => $postData['email'], 'password' => $postData['password'] ))) {
             $res = true;
             $msg = 'successfully login';
         }
@@ -161,7 +202,7 @@ class UserController extends BaseController {
             case Password::INVALID_USER:
                 Session::flash('error', Lang::get($response));
             case Password::REMINDER_SENT:
-                Session::flash('success', Lang::get($response));
+                Session::flash('success', Lang::get('Password reset link has been sent to your email account.'));
         }
 
     	return $this->passwdReqForm();
@@ -225,6 +266,32 @@ class UserController extends BaseController {
 		
     	$data = array('messages'=> $messages);
     	return View::make('rider/message',$data);
-    	
+    }
+    
+    private function verifyUser($id)
+    {
+		$user = rider::getInstance($id);
+		$user->verify = 1;		
+		return $user->save();
+    }
+
+    public function userVerification($token = '')
+    {
+    	if($token) {
+    		$userModel = App::make('riderModel');
+    		$records = $userModel->getRecords(array('activation' => array('=', $token)));
+    		if(empty($records)) {
+    			return View::make('error.system_error', array('error' => array('heading'=>'Broken verification link', 'description' => 'kindly try again or contact us.') ));
+    		}
+    		$record = array_pop($records);
+    		$this->verifyUser($record->id);
+
+    		$msg = "Hurray, You have <b>successfully verified,</b> your email. Kindly proceed to login.";
+    		Session::put('message', $msg);
+
+    		return Redirect::to('login');
+    	}
+
+    	return View::make('error.system_error', array('error' => array('heading'=>'Broken verification link', 'description' => 'kindly try again or contact us.') ));
     }
 }

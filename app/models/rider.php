@@ -21,7 +21,7 @@ class riderModel extends Eloquent implements UserInterface, RemindableInterface 
 	 *
 	 * @var array
 	 */
-	protected $hidden = array('password' ,'remember_token');
+	protected $hidden = array('remember_token');
 
     public $pagination = "";
 
@@ -88,5 +88,21 @@ class riderModel extends Eloquent implements UserInterface, RemindableInterface 
     public function getPagination()
     {
         return $this->pagination;
+    }
+    
+    public function getRecords($filters = array())
+    {
+    	if (empty($filters)) {
+    		$riders = $this->select('*')->get()->all();
+    	}
+    	else {
+    		$riders = $this->select('*');
+    		foreach ($filters as $key => $value) {
+    			$riders = $riders->where($key, $value[0], $value[1]);
+    		}
+    		$riders = $riders->get()->all();
+    	}
+    	
+    	return $riders;
     }
 }
