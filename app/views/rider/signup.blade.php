@@ -130,7 +130,7 @@
 
 			<div class="form-group gap-top-20">
 				<div class="col-sm-offset-3 col-sm-9">
-				<button type="submitButton" class="btn btn-primary btn-block">Continue&nbsp;<i class="glyphicon glyphicon-menu-right"></i></button>
+				<button id="singupButton" type="submitButton" class="btn btn-primary btn-block" data-loading-text="Processing..." autocomplete="off">Continue&nbsp;<i class="glyphicon glyphicon-menu-right"></i></button>
 				</div>
 			</div>
 		</form>

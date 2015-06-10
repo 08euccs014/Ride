@@ -77,6 +77,7 @@ $(document).ready(function() {
         var actionUrl= $('#signupform').attr('action');
         var postData = $('#signupform').serialize();
 
+        $('#singupButton').button('loading');
 
         ajaxRequest(actionUrl, postData, 'POST', 'json', function(response){
             if(response.status == 1) {
@@ -84,6 +85,11 @@ $(document).ready(function() {
             }else {
             	alert(response.message);
             }
-        }, function(response){alert(response);} );
+            $('#singupButton').button('reset');
+        }, 
+        function(response){
+        	$('#singupButton').button('reset');
+        	alert(response);
+        } );
     });
 });
