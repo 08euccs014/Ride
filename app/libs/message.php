@@ -15,6 +15,7 @@ class message extends lib
     public $content = "";
     public $status = 0;
     public $action = 0;
+    public $parent_id = 0;
 
     public function reset()
     {
@@ -23,6 +24,7 @@ class message extends lib
         $this->content = "";
         $this->status = 0;
         $this->action = 0;
+        $this->parent_id = 0;
     }
     
     public function receiver()

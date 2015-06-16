@@ -25,3 +25,10 @@
 .form-inlable .form-control {
 	padding : 6px 12px 6px 35px;
 }
+
+.message.panel.panel-default {
+	border-color : #E7E7E7;	
+}
+.message.panel > .panel-body {
+	background-color : #E7E7E7;	
+}

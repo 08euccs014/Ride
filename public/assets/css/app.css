@@ -57,7 +57,10 @@ ul.rider-list {
 
 hr {
 	border-top : 1px solid #DDD;
-} 
+}
+.hr {
+	border-top : 1px solid #DDD;
+}
 
 .rider-list .img-container
 {

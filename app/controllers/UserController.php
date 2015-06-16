@@ -247,9 +247,11 @@ class UserController extends BaseController {
     	$receiverId = Input::get('receiverId', 0);
     	$senderId = Input::get('senderId', 0);
     	$contactMsg = Input::get('msg', '');
+    	$replyToMsg = Input::get('replyToMsg', 0);
+    	
 
     	try {
-	    	$message = message::getInstance(0, array('sender_id' => $senderId, 'receiver_id' => $receiverId, 'content' => $contactMsg));
+	    	$message = message::getInstance(0, array('sender_id' => $senderId, 'receiver_id' => $receiverId, 'content' => $contactMsg, 'parent_id' => $replyToMsg));
 	    	$message->save();
     	}
     	catch(Exception $e) {
@@ -264,7 +266,7 @@ class UserController extends BaseController {
 		$rider  = rider::getInstance($loggedIn);
 		$messages = $rider->getMessages();
 		
-    	$data = array('messages'=> $messages);
+    	$data = array('messages'=> $messages, 'userLoggedIn' => $rider);
     	return View::make('rider/message',$data);
     }
     
