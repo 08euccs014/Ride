@@ -39,4 +39,5 @@ Route::group(array('before' => 'auth'), function()
 {
 	Route::post('ajax/rider/send_contact_msg', 'UserController@sendContactMsg');
 	Route::get('messages', 'UserController@displayMessages');
+	Route::post('ajax/rider/get_conversation', 'UserController@getConversation');
 });

@@ -264,9 +264,9 @@ class UserController extends BaseController {
     {
 		$loggedIn = Auth::user()->id;
 		$rider  = rider::getInstance($loggedIn);
-		$messages = $rider->getMessages();
+		$contacts = $rider->getContacts();
 		
-    	$data = array('messages'=> $messages, 'userLoggedIn' => $rider);
+    	$data = array('userLoggedIn' => $rider, 'contacts' => $contacts);
     	return View::make('rider/message',$data);
     }
     
@@ -295,5 +295,20 @@ class UserController extends BaseController {
     	}
 
     	return View::make('error.system_error', array('error' => array('heading'=>'Broken verification link', 'description' => 'kindly try again or contact us.') ));
+    }
+    
+    public function getConversation()
+    {
+    	$contactId = Input::get('contactId', 0);
+    	
+    	if ($contactId == 0) {
+    		return Response::json(array('status' => 0));
+    	}
+    	
+   		$loggedIn = Auth::user()->id;
+		$rider  = rider::getInstance($loggedIn);
+		$messages = $rider->getMessages($contactId);
+    	
+		return Response::json(array('status' => 1, 'content' => $messages));
     }
 }

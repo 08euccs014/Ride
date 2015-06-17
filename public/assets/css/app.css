@@ -76,3 +76,34 @@ hr {
 .site-nav .dropdown-menu {
 	min-width : 120px;
 }
+.cursor-pointer {
+	cursor: pointer;
+}
+
+.loading {
+	font-size : 50px;
+	animation : 2s linear 0s normal none infinite running loading;
+}
+@keyframes loading {
+	0% {
+	   	-webkit-transform: rotate(0deg);
+	    -moz-transform: rotate(0deg);
+	    -ms-transform: rotate(0deg);
+	    -o-transform: rotate(0deg);
+	    transform: rotate(0deg);
+	}
+	100% {
+	    -webkit-transform: rotate(359deg);
+	    -moz-transform: rotate(359deg);
+	    -ms-transform: rotate(359deg);
+	    -o-transform: rotate(359deg);
+	    transform: rotate(359deg);
+	}
+}
+
+.bl {
+	border-left : 1px solid #DDD;
+}
+.br {
+	border-right : 1px solid #DDD;
+}

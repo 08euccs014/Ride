@@ -47,11 +47,27 @@ class rider extends lib
         return $trip;
     }
     
-    public function getMessages()
+    //get the conversation messages of logged in with the receiver
+    public function getMessages($receiverId)
     {
     	$messageModel  = App::make('messageModel');
-    	$messages       = $messageModel->where('receiver_id', '=', $this->id)->get()->all();    	
+    	$messages       = $messageModel->select('id', 'content', 'sender_id', 'receiver_id')->whereIn('receiver_id', array($receiverId, $this->id))->whereIn('sender_id', array($receiverId, $this->id))->orderBy('created_at')->get()->all();    	
     	return $messages; 
+    }
+    
+    public function getContacts()
+    {
+    	$messageModel  	= App::make('messageModel');
+    	$contactsIds        		= $messageModel->select('sender_id')->where('receiver_id', '=', $this->id)->groupBy('sender_id')->get()->all();    	
+    	if (empty($contactsIds)) {
+    		return false;
+    	}
+    	$contacts = array();
+    	foreach ($contactsIds as $contact) {
+    		$contacts[$contact->sender_id] = $this->getInstance($contact->sender_id); 
+    	}
+
+    	return $contacts;
     }
 
 }
