@@ -107,3 +107,6 @@ hr {
 .br {
 	border-right : 1px solid #DDD;
 }
+.black-link a{
+	color : #333 !important;
+}
