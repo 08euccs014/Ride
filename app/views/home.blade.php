@@ -52,9 +52,7 @@ $(document).ready(function() {
 	var autocomplete = new google.maps.places.Autocomplete(ridefrom);
 	addPlaceListener(ridefrom, autocomplete);
 
-	var ridefrom = document.getElementById('rideto');>    
-</div>
-<hr/>
+	var ridefrom = document.getElementById('rideto');
 	var autocomplete = new google.maps.places.Autocomplete(ridefrom);
 	addPlaceListener(ridefrom, autocomplete);
 });
