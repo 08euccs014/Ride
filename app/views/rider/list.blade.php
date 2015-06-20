@@ -1,14 +1,19 @@
 <div>
 	@if( !empty($filters) )
-		<div class="alert alert-info" id="resetFilter">
+		<div class="alert alert-info row" id="resetFilter">
 			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 			  <span aria-hidden="true">&times;</span>
 			</button>
-			<h4>Showing Results ::  From - {{ $filters['ridefrom']['loc'] }},  To - {{ $filters['rideto']['loc'] }} </h4>
-			<button class="btn btn-info" onClick="$('#resetFilter').alert('close'); return false;">
-				Reset
-			</button>
-				
+			<div class="col-md-10">
+				<h4>Showing Results :</h4>
+				<p><strong>From -</strong> {{ $filters['ridefrom']['loc'] }}</p>
+				<p><strong>To -</strong> {{ $filters['rideto']['loc'] }}</p> 
+			</div>
+			<div class="col-md-2">
+				<button class="btn btn-info" onClick="$('#resetFilter').alert('close'); return false;">
+					Reset
+				</button>
+			</div>
 		</div>
 	@endif
 	@if(!empty($riders))

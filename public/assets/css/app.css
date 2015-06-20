@@ -110,3 +110,17 @@ hr {
 .black-link a{
 	color : #333 !important;
 }
+
+/*Google autocomplete css START*/
+.pac-container::after {
+	background-image : none !important;
+}
+.pac-item {
+	line-height : 35px;
+	padding-left : 10px;
+}
+.pac-icon {
+	background-image : none !important;
+	display:none;
+}
+/*Google autocomplete css END*/

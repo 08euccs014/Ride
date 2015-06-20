@@ -76,7 +76,7 @@
 			<div class="form-group">
 			    <label for="ridefrom" class="col-sm-3 control-label">Ride From</label>
 			    <div class="col-sm-9 form-inlable google-mapper-box">
-			      <input type="text" class="form-control google-mapper" name="userdata[ridefrom][loc]" placeholder="From" />
+			      <input type="text" class="form-control google-mapper" name="userdata[ridefrom][loc]" placeholder="From" id="ridefrom"/>
 			      <input type="hidden" class="google-mapper-lat" name="userdata[ridefrom][lat]" value="0" />
 			      <input type="hidden" class="google-mapper-lng" name="userdata[ridefrom][lng]" value="0" />
 			      <i class="glyphicon glyphicon-map-marker"></i>
@@ -99,7 +99,7 @@
 			<div class="form-group">
 			    <label for="rideto" class="col-sm-3 control-label">Ride To</label>
 			    <div class="col-sm-9 form-inlable">
-			      <input type="text" class="form-control google-mapper" name="userdata[rideto][loc]" placeholder="To" data-map-latitude='0' data-map-longitude='0' />
+			      <input type="text" class="form-control google-mapper" name="userdata[rideto][loc]" placeholder="To" data-map-latitude='0' data-map-longitude='0'  id="rideto"/>
 			      <input type="hidden" class="google-mapper-lat" name="userdata[rideto][lat]" value="0" />
                   <input type="hidden" class="google-mapper-lng" name="userdata[rideto][lng]" value="0" />
 			      <i class="glyphicon glyphicon-map-marker"></i>
@@ -137,6 +137,18 @@
 		
 </div>
 </div>
+<script type="text/javascript">
+$(document).ready(function() {
+	var ridefrom = document.getElementById('ridefrom');
+	var autocomplete = new google.maps.places.Autocomplete(ridefrom);
+	addPlaceListener(ridefrom, autocomplete);
+
+	var ridefrom = document.getElementById('rideto');
+	var autocomplete = new google.maps.places.Autocomplete(ridefrom);
+	addPlaceListener(ridefrom, autocomplete);
+});
+</script>
+
 {{ HTML::script('assets/js/formValidation.min.js') }}
 {{ HTML::script('assets/js/formValidation.bootstrap.min.js') }}
 {{ HTML::script('assets/js/signup.js') }}

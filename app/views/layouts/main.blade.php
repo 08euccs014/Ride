@@ -20,7 +20,7 @@
 	{{ HTML::style('assets/css/override.css') }}
 	{{ HTML::style('assets/css/app.css') }}
 	{{ HTML::script('assets/js/jquery.min.js') }}
-	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=places"></script>
 	<script>
 		window.base_url = '{{ url('/') }}';
 	</script>

@@ -16,11 +16,6 @@ function codeAddress(obj, address) {
   });
 }
 
-$('.google-mapper').change(function () {
-	var address = $(this).val();  
-	codeAddress($(this), address);
-});
-
 function googleAdresses(object, result) {
 	var addresses = "";
 	if(result == false) {
@@ -40,6 +35,21 @@ function googleAdresses(object, result) {
 	var longitude =  result.geometry.location.lng();
 	$(object).parent().children('.google-mapper-lng').val(longitude);
 }
+
+function addPlaceListener(object, autocomplete)
+{
+	google.maps.event.addListener(autocomplete, 'place_changed', function() {
+		var place = autocomplete.getPlace();
+		if(place.formatted_address != undefined) {
+			var address = place.formatted_address;
+		} else {
+			var address = place.name;
+		}
+
+		codeAddress(object ,address);
+	});
+}
+
 
 function ajaxRequest(actionUrl, data, method, response, successCallback, errorCallback)
 {
