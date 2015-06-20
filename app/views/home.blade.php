@@ -41,7 +41,9 @@
 				</div>
 			</div>
 		</form>
-	</div
+	</div>
+</div>
+<hr/>
 <!-- Riders list -->
 <div id="riderlist" class="row gap-top-20">
     @include('rider/list')
