@@ -186,4 +186,19 @@ class lib
         return $this->id;
     }
 
+    public function delete()
+    {
+        $model  = $this->getModel();
+        $obj    = $model->find($this->getId());
+        try {
+            $res = $obj->delete();
+        }
+        catch(Exception $e) {
+            return false;
+        }
+
+        unset(self::$instances[self::$name][$this->getId()]);
+        return $res;
+    }
+
 }

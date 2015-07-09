@@ -13,7 +13,7 @@ class UserController extends BaseController {
 
         //let's sanitize the data
         try {
-        	$postData = $this->sanitize($postData, array('group', 'gender', 'firstname', 'timefrom', 'timeto', 'ridefrom', 'rideto', 'email', 'password'));
+        	$postData = $this->sanitize($postData, array('group', 'gender', 'firstname', 'ridefrom', 'rideto', 'email', 'password'));
         }
         catch (Exception $e) {
         	return Response::json(array('status' => 0, 'message' => $e->getMessage()));
@@ -47,13 +47,21 @@ class UserController extends BaseController {
     	foreach ($dirtyData as $key => $value) {
     		if (in_array($key, $requiredData)) {
     			if ( isset($dirtyData[$key]) && $dirtyData[$key] != null) {
-    				$sanitizedData[$key] = $value;
+    				if (is_array($value)) {
+                        $sanitizedData[$key] = array_map('trim', $value);
+                    }else {
+                        $sanitizedData[$key] = trim($value);
+                    }
     			}
     			else {
     				throw new Exception("$key can not be empty", '503');
     			}
     		}
-    		$sanitizedData[$key] = $value;
+            if (is_array($value)) {
+                $sanitizedData[$key] = array_map('trim', $value);
+            }else {
+                $sanitizedData[$key] = trim($value);
+            }
     	}
     	 
         return $sanitizedData;
@@ -77,7 +85,6 @@ class UserController extends BaseController {
         $user->phone     = $userData['contact'];
         $user->username  = $userData['email'];
         $user->password  = Hash::make($userData['password']);
-        $user->lastname  = $userData['lastname'];
         $currentDate = date('Y-m-d H:i:s');
         $user->activation =  md5($user->email.$currentDate);
 
@@ -311,4 +318,54 @@ class UserController extends BaseController {
     	
 		return Response::json(array('status' => 1, 'content' => $messages));
     }
+    
+   public function profile()
+   {
+        $userId = Auth::user()->id;
+        $user = rider::getInstance($userId);
+   		return View::make('rider/profile',array('user' => $user));
+   }
+
+   public function saveProfile()
+   {
+        $userId = Auth::user()->id;
+        $user   = rider::getInstance($userId); 
+
+        $userData = Input::get('userdata', array());
+
+        //let's sanitize the data
+        try {
+            $userData = $this->sanitize($userData, array('group', 'gender', 'firstname', 'ridefrom', 'rideto'));
+        }
+        catch (Exception $e) {
+            return Response::json(array('status' => 0, 'message' => $e->getMessage()));
+        }
+        
+        $user->firstname = $userData['firstname'];
+        $user->lastname  = $userData['lastname'];
+        $user->gender    = $userData['gender'];
+        $user->group     = $userData['group'];
+        $user->phone     = $userData['contact'];
+        $user->save();
+
+        //check if users location is updated then do not save it again.
+        $trip = $user->getTrip();
+        if ($trip) {
+
+            //if any location is changes then delete the trip and create a new one
+            if($trip->from()->latitude != $userData['ridefrom']['lat'] || $trip->to()->latitude != $userData['rideto']['lat']) {
+                $trip->delete();
+                $this->saveLocation($userData, $user);
+            }
+        }
+        else {
+            $this->saveLocation($userData, $user);
+        }
+
+        $message = "Your profile has been <b>successfully updated</b>.";
+        Session::put('success', $message);
+        
+        return Response::json(array('status' => 1, 'message' => 'successfully updated', 'url' => url('profile')));
+
+   }
 }

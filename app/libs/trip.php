@@ -30,4 +30,13 @@ class trip extends lib
     {
         return location::getInstance($this->to);
     }
+
+    //delete the location entries too while deleting the whole trip
+    public function delete()
+    {
+        $this->from()->delete();
+        $this->to()->delete();
+
+        return parent::delete();
+    }
 }
