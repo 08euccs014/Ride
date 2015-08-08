@@ -18,6 +18,7 @@
 	<title>Join My Way : Best Ride Pooling Initiative</title>
 	{{ HTML::style('assets/css/bootstrap.min.css') }}
 	{{ HTML::style('assets/css/override.css') }}
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 	{{ HTML::style('assets/css/app.css') }}
 	{{ HTML::script('assets/js/jquery.min.js') }}
 	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=places"></script>
@@ -27,12 +28,17 @@
 </head>
 <body>
 @yield('tag')
-	<div class="container">
+		<div class="container">
 		@yield('header')
 		@yield('notification')
+		<div class="app-container">
 		@yield('content')
+		</div>
+		</div>
+		<div class="container-fluid">
 		@yield('footer')
-	</div>
+		</div>
+	
 </body>
 <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
 

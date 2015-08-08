@@ -47,29 +47,29 @@ Log::useDailyFiles(storage_path().'/logs/laravel.log');
 | shown, which includes a detailed stack trace during debug.
 |
 */
-
-App::error(function(Exception $exception, $code)
-{
-	Log::error($exception);
-
-    return View::make('error/server_error');
-});
-
-/*
- * listen to php fatal errors
- */
-App::fatal(function($exception)
-{
-    Log::error($exception);
-
-    return View::make('error/server_error');
-});
-
-App::missing(function($exception)
-{
-    return Response::view('error/404', array(), 404);
-});
-
+if(App::environment() == 'production') {
+	App::error(function(Exception $exception, $code)
+	{
+		Log::error($exception);
+	
+	    return View::make('error/server_error');
+	});
+	
+	/*
+	 * listen to php fatal errors
+	 */
+	App::fatal(function($exception)
+	{
+	    Log::error($exception);
+	
+	    return View::make('error/server_error');
+	});
+	
+	App::missing(function($exception)
+	{
+	    return Response::view('error/404', array(), 404);
+	});
+}
 
 /*
 |--------------------------------------------------------------------------

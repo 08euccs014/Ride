@@ -1,6 +1,5 @@
 @CHARSET "UTF-8";
 body {
-	background-color: #eee;
 	font-family: 'Open Sans', sans-serif;
 }
 
@@ -12,6 +11,26 @@ body {
 {
 	margin-top : 20px;
 }
+.gap-top-30
+{
+	margin-top : 30px;
+}
+.gap-top-40
+{
+	margin-top : 40px;
+}
+.gap-top-45 
+{
+	margin-top : 45px;
+}
+.gap-bottom-20
+{
+	margin-bottom : 20px;
+}
+.gap-bottom-30
+{
+	margin-bottom : 30px;
+}
 .gap-ver-10
 {
 	margin-top : 10px;
@@ -22,9 +41,15 @@ body {
 	margin-top : 20px;
 	margin-bottom : 20px;
 }
-
-.gap-top-45 {
-	margin-top : 45px;
+.gap-ver-30
+{
+	margin-top : 30px;
+	margin-bottom : 30px;
+}
+.gap-ver-40
+{
+	margin-top : 40px;
+	margin-bottom : 40px;
 }
 .gap-bottom-10
 {
@@ -33,6 +58,9 @@ body {
 .gap-bottom-20
 {
 	margin-bottom : 20px;
+}
+.app-container {
+	min-height : 700px;
 }
 
 ul.rider-list {
@@ -124,3 +152,54 @@ hr {
 	display:none;
 }
 /*Google autocomplete css END*/
+
+.fa-round {
+	border: 1px solid;
+	border-radius: 50px;
+	height : 100px;
+	width : 100px;
+	padding : 20px;
+}
+.fa-8x {
+	font-size : 8em;
+}
+.fa-shield {
+	color : #FFD740;	
+}
+.fa-users {
+	color : #B4DCF3;'
+}
+.fa-leaf {
+	color :#75C176;'
+}
+.fa-money {
+	color : #4DB6AC;
+}
+
+.info-section {
+	min-height : 250px;
+	padding : 30px;
+}
+.info-section .info-text {
+	line-height : 30px;
+}
+.app-footer {
+	background-color : #3EDDC9;
+	padding : 50px 0px;
+	color : #FFFFFF;
+}
+.app-footer a{
+	color : #FFFFFF;
+}
+.app-footer .border-left {
+	border-left : 1px solid #39C7B5;
+}
+
+.app-footer-second {
+	padding : 20px 0px;
+	background-color : #FAFAFA;
+	color : #B2B2B2;
+}
+.app-footer-second a{
+	color : #B2B2B2;
+}

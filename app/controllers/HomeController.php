@@ -17,7 +17,11 @@ class HomeController extends BaseController {
 
 	public function home()
 	{
+		return View::make('newhome');
+	}
 
+	public function riders()
+	{
         $filters     = Input::get('searchdata', array());
 
         $user        = Auth::user();

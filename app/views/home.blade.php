@@ -11,7 +11,7 @@
 			<h5>A Ride Sharing Initiative To Save Environment, Save Fuel, Save Money</h5>
 		</div>
 		</div>
-		<form class="form-horizontal gap-top-20 row" action="{{ url('/') }}" method="GET">
+		<form class="form-horizontal gap-top-20 row" action="{{ url('riders') }}" method="GET">
 			<div class="form-group">
 			    <label for="ridefrom" class="col-sm-2 control-label">From</label>
 

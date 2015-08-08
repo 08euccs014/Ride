@@ -12,6 +12,7 @@
 */
 
 Route::get('/', 'HomeController@home');
+Route::get('riders', 'HomeController@riders');
 Route::get('aboutus', 'HomeController@aboutus');
 Route::get('privacy_policies', 'HomeController@privacyPolicies');
 Route::get('term_and_conditions', 'HomeController@termConditions');

@@ -90,17 +90,29 @@ class riderModel extends Eloquent implements UserInterface, RemindableInterface 
         return $this->pagination;
     }
     
-    public function getRecords($filters = array())
+    public function getRecords($filters = array(), $pagination = false)
     {
     	if (empty($filters)) {
-    		$riders = $this->select('*')->get()->all();
+    		if($pagination) {
+    			$riders = $this->select('*')->paginate(RIDER_PAGINATION);
+    		}
+			else {
+    			$riders = $this->select('*')->get()->all();
+    		}
     	}
     	else {
     		$riders = $this->select('*');
     		foreach ($filters as $key => $value) {
     			$riders = $riders->where($key, $value[0], $value[1]);
     		}
-    		$riders = $riders->get()->all();
+    		if($pagination) {
+    			$riders = $riders->paginate(RIDER_PAGINATION);
+    		}else {
+    			$riders = $riders->get()->all();
+    		}
+    	}
+    	if($pagination && !empty($riders)) {
+    		$this->pagination = $riders->appends(array('filter' => $filters))->links();
     	}
     	
     	return $riders;

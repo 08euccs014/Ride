@@ -177,6 +177,10 @@ $(document).ready(function(){
     $(function () {
     	  $('[data-toggle="popover"]').popover()
     });
+    
+    $(function () {
+    	  $('[data-toggle="tooltip"]').tooltip()
+    });
 	
 	//toggle radio button group
     $('.btn-group[data-toggle="buttons"] label').on('click', function () {
